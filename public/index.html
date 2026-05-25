@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USA Custom Trophies</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-inner">
+            <div class="brand">
+                <h1>USA Custom Trophies</h1>
+                <p class="tagline">Fictitious Trophies for Every Occasion.</p>
+            </div>
+            <nav class="nav-links">
+                <a href="#">Shop</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Product Page -->
+    <main>
+        <div class="product" id="product">
+
+            <div class="product-image-wrap">
+                <img id="productImage" src="" alt="Trophy" />
+                <div id="imageNotFound" class="image-placeholder hidden">
+                    <span>🏆</span>
+                    <p>Image coming soon</p>
+                </div>
+            </div>
+
+            <div class="product-details">
+                <p class="product-category">Custom Award</p>
+                <h2 id="productName">Loading…</h2>
+                <p id="productDescription" class="product-desc"></p>
+                <div class="product-price-row">
+                    <span id="productPrice" class="product-price"></span>
+                </div>
+                <p class="product-note">Each trophy is custom-made to order. Allow 4–6 weeks for delivery.</p>
+                <button id="orderBtn" class="btn-order">Order Now</button>
+            </div>
+
+        </div>
+
+        <!-- Not Found State -->
+        <div id="notFound" class="not-found hidden">
+            <h2>Trophy Not Found</h2>
+            <p>We couldn't find an item with that ID.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 USA Custom Trophies &mdash; All trophies are fictitious. Any resemblance to real sporting events is entirely intentional.</p>
+    </footer>
+
+    <!-- Order Modal -->
+    <div id="modalOverlay" class="modal-overlay hidden">
+        <div class="modal">
+            <button id="modalClose" class="modal-close">&times;</button>
+            <div class="modal-icon">🏆</div>
+            <h3>Thanks for the Order!!</h3>
+            <p>This is a custom product — you'll be notified when it's available.</p>
+            <button id="modalOk" class="btn-modal-ok">Sounds Good!</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
