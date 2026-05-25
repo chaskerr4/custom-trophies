@@ -50,6 +50,21 @@
         imgNotFound.classList.remove('hidden');
     }
 
+    // ── Image → lightbox ─────────────────────────────────────────────────
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    const lightboxImg     = document.getElementById('lightboxImg');
+    const lightboxClose   = document.getElementById('lightboxClose');
+
+    imgEl.addEventListener('click', () => {
+        if (imgEl.classList.contains('hidden')) return;
+        lightboxImg.src = imgEl.src;
+        lightboxOverlay.classList.remove('hidden');
+    });
+    lightboxClose.addEventListener('click', () => lightboxOverlay.classList.add('hidden'));
+    lightboxOverlay.addEventListener('click', e => {
+        if (e.target === lightboxOverlay) lightboxOverlay.classList.add('hidden');
+    });
+
     // ── Order button → modal ──────────────────────────────────────────────
     const overlay    = document.getElementById('modalOverlay');
     const orderBtn   = document.getElementById('orderBtn');

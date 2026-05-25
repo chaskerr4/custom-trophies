@@ -10,11 +10,8 @@
 
     <!-- Header -->
     <header>
+        <img src="assets/USA-Trophy-banner.jpg" alt="USA Custom Trophies" class="site-banner" />
         <div class="header-inner">
-            <div class="brand">
-                <h1>USA Custom Trophies</h1>
-                <p class="tagline">Fictitious Trophies for Every Occasion.</p>
-            </div>
             <nav class="nav-links">
                 <a href="#">Shop</a>
                 <a href="#">About</a>
@@ -42,7 +39,7 @@
                 <div class="product-price-row">
                     <span id="productPrice" class="product-price"></span>
                 </div>
-                <p class="product-note">Each trophy is custom-made to order. Allow 4–6 weeks for delivery.</p>
+                <p class="product-note">Trophies are custom made to order. Allow 2-forever weeks for delivery.</p>
                 <button id="orderBtn" class="btn-order">Order Now</button>
             </div>
 
@@ -57,8 +54,14 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 USA Custom Trophies &mdash; All trophies are fictitious. Any resemblance to real sporting events is entirely intentional.</p>
+        <p>&copy; 2026 USA Custom Trophies &mdash; All trophies are fictitious. Any resemblance to real sporting events is entirely intentional. There is no actual physical trophy. But you'll always have this graphic.</p>
     </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxOverlay" class="lightbox-overlay hidden">
+        <button id="lightboxClose" class="lightbox-close">&times;</button>
+        <img id="lightboxImg" src="" alt="Trophy" />
+    </div>
 
     <!-- Order Modal -->
     <div id="modalOverlay" class="modal-overlay hidden">
@@ -67,7 +70,7 @@
             <div class="modal-icon">🏆</div>
             <h3>Thanks for the Order!!</h3>
             <p>This is a custom product — you'll be notified when it's available.</p>
-            <button id="modalOk" class="btn-modal-ok">Sounds Good!</button>
+            <button id="modalOk" class="btn-modal-ok">PERFECT</button>
         </div>
     </div>
 
