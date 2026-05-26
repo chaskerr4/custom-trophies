@@ -47,5 +47,12 @@
     "file": "trophy-1006.jpg",
     "price": "$99",
     "description": "1976 Chuck Holtz\r\n1977 Richard Tamutus"
+  },
+  {
+    "id": 1007,
+    "name": "East Aurora Teacher of the Year",
+    "file": "trophy-1007.jpg",
+    "price": "$99",
+    "description": "Awarded annually:\r\n\r\n1977: Richard Tamutus"
   }
 ]
