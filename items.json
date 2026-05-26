@@ -26,5 +26,12 @@
     "file": "trophy-1003.jpg",
     "price": "$149",
     "description": "Annual award given to the outstanding ultimate Observer. "
+  },
+  {
+    "id": 1004,
+    "name": "2026 Observer of the Year (female)",
+    "file": "trophy-1004.jpg",
+    "price": "$149",
+    "description": "Annual award to an ultimate Observer. "
   }
 ]
