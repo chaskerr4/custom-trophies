@@ -33,5 +33,12 @@
     "file": "trophy-1004.jpg",
     "price": "$149",
     "description": "Annual award to an ultimate Observer. "
+  },
+  {
+    "id": 1005,
+    "name": "2026 Granddaughter of the Year Award",
+    "file": "trophy-1005.jpg",
+    "price": "PRICELESS",
+    "description": "Given annually to the best granddaughter. "
   }
 ]
