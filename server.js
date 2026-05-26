@@ -101,7 +101,7 @@ app.post('/submit-item', upload.single('image'), async (req, res) => {
         if (resend && notifyEmail) {
             try {
                 await resend.emails.send({
-                    from:    'TrophyShop <notifications@trophyshop.jinxpwa.com>',
+                    from:    'TrophyShop <notifications@jinxpwa.com>',
                     to:      notifyEmail,
                     subject: `New Trophy Submission — #${newId}: ${name}`,
                     html:    `<h2>New Trophy: ${name}</h2>
