@@ -3,6 +3,7 @@ const path     = require('path');
 const fs       = require('fs');
 const multer   = require('multer');
 const { Resend } = require('resend');
+const { marked } = require('marked');
 
 const app  = express();
 const PORT = process.env.PORT || 3500;
@@ -69,8 +70,20 @@ app.use('/ITEMS', express.static(path.join(__dirname, 'ITEMS')));
 // ── Serve assets (banner, graphics, etc.) ─────────────────────────────────
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
-// ── Serve docs folder ──────────────────────────────────────────────────────
-app.use('/docs', express.static(path.join(__dirname, 'docs')));
+// ── Serve docs folder — render .md files as HTML ─────────────────────────
+app.get('/docs/:file', (req, res) => {
+    const filePath = path.join(__dirname, 'docs', path.basename(req.params.file));
+    if (!fs.existsSync(filePath)) return res.status(404).send('Not found');
+    if (!filePath.endsWith('.md')) return res.sendFile(filePath);
+    const html = marked(fs.readFileSync(filePath, 'utf8'));
+    res.send(`<!DOCTYPE html><html><head><meta charset="utf-8">
+        <title>${req.params.file}</title>
+        <style>body{font-family:Georgia,serif;max-width:860px;margin:40px auto;padding:0 20px;line-height:1.7;color:#222}
+        h1,h2,h3{font-family:system-ui,sans-serif}table{border-collapse:collapse;width:100%}
+        td,th{border:1px solid #ccc;padding:8px 12px}th{background:#f4f4f4}
+        code{background:#f4f4f4;padding:2px 5px;border-radius:3px}</style>
+        </head><body>${html}</body></html>`);
+});
 
 // ── Serve items catalog ────────────────────────────────────────────────────
 app.get('/items.json', (req, res) => {
