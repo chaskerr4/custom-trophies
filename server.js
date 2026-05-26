@@ -69,6 +69,9 @@ app.use('/ITEMS', express.static(path.join(__dirname, 'ITEMS')));
 // ── Serve assets (banner, graphics, etc.) ─────────────────────────────────
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
+// ── Serve docs folder ──────────────────────────────────────────────────────
+app.use('/docs', express.static(path.join(__dirname, 'docs')));
+
 // ── Serve items catalog ────────────────────────────────────────────────────
 app.get('/items.json', (req, res) => {
     res.sendFile(path.join(__dirname, 'items.json'));
