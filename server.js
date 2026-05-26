@@ -2,7 +2,6 @@ const express  = require('express');
 const path     = require('path');
 const fs       = require('fs');
 const multer   = require('multer');
-const { execSync } = require('child_process');
 const { Resend } = require('resend');
 
 const app  = express();
@@ -32,6 +31,37 @@ function loadItems() {
     } catch (e) { console.error('Failed to load items.json', e); }
 }
 loadItems();
+
+// ── GitHub Contents API push (replaces fragile git CLI on Railway) ─────────
+async function githubPush(filename, imgBuffer, updatedItems, newId, name) {
+    const token = process.env.GH_PAT;
+    const repo  = process.env.GH_REPO;
+    if (!token || !repo) { console.warn('GH_PAT/GH_REPO not set — skipping GitHub push'); return; }
+
+    const base    = `https://api.github.com/repos/${repo}/contents`;
+    const headers = { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json', 'User-Agent': 'trophyshop-server' };
+
+    // 1. Upload image file
+    const imgRes = await fetch(`${base}/ITEMS/${filename}`, {
+        method: 'PUT', headers,
+        body: JSON.stringify({ message: `Add trophy image: ${filename}`, content: imgBuffer.toString('base64') })
+    });
+    if (!imgRes.ok) console.error('GitHub image upload failed:', await imgRes.text());
+
+    // 2. Get current SHA of items.json then update it
+    const getRes  = await fetch(`${base}/items.json`, { headers });
+    const getJson = await getRes.json();
+    const putRes  = await fetch(`${base}/items.json`, {
+        method: 'PUT', headers,
+        body: JSON.stringify({
+            message: `Add trophy submission #${newId}: ${name}`,
+            content: Buffer.from(JSON.stringify(updatedItems, null, 2)).toString('base64'),
+            sha:     getJson.sha,
+        })
+    });
+    if (!putRes.ok) console.error('GitHub items.json update failed:', await putRes.text());
+    else console.log(`GitHub: pushed trophy #${newId}`);
+}
 
 // ── Serve trophy images ────────────────────────────────────────────────────
 app.use('/ITEMS', express.static(path.join(__dirname, 'ITEMS')));
@@ -74,28 +104,8 @@ app.post('/submit-item', upload.single('image'), async (req, res) => {
         items.push(newItem);
         fs.writeFileSync(path.join(__dirname, 'items.json'), JSON.stringify(items, null, 2));
 
-        // ── Git push to persist across deploys ────────────────────────────
-        const ghPat  = process.env.GH_PAT;
-        const ghRepo = process.env.GH_REPO;
-        const ghUser = process.env.GH_USER || 'trophyshop-bot';
-        const ghMail = process.env.GH_EMAIL || 'bot@trophyshop.com';
-
-        if (ghPat && ghRepo) {
-            try {
-                const remote = `https://${ghPat}@github.com/${ghRepo}.git`;
-                execSync(`git config user.name "${ghUser}"`,           { cwd: __dirname });
-                execSync(`git config user.email "${ghMail}"`,          { cwd: __dirname });
-                execSync(`git remote set-url origin ${remote}`,        { cwd: __dirname });
-                execSync(`git add ITEMS/${filename} items.json`,       { cwd: __dirname });
-                execSync(`git commit -m "Add trophy submission #${newId}: ${name}"`, { cwd: __dirname });
-                execSync(`git push origin master`,                     { cwd: __dirname });
-                console.log(`Pushed trophy #${newId} to GitHub`);
-            } catch (gitErr) {
-                console.error('Git push failed (item still live):', gitErr.message);
-            }
-        } else {
-            console.warn('GH_PAT/GH_REPO not set — skipping git push');
-        }
+        // ── Push to GitHub via Contents API (reliable on Railway) ────────
+        await githubPush(filename, req.file.buffer, items, newId, name);
 
         // ── Send notification email ───────────────────────────────────────
         if (resend && notifyEmail) {
@@ -104,19 +114,19 @@ app.post('/submit-item', upload.single('image'), async (req, res) => {
                     from:    'TrophyShop <notifications@jinxpwa.com>',
                     to:      notifyEmail,
                     subject: `New Trophy Submission — #${newId}: ${name}`,
-                    html:    `<h2>New Trophy: ${name}</h2>
+                    html:    `<h2>New Trophy Submitted</h2>
                               <p><strong>ID:</strong> #${newId}</p>
+                              <p><strong>Name:</strong> ${name}</p>
                               <p><strong>Price:</strong> ${price}</p>
                               <p><strong>Description:</strong> ${description}</p>
-                              <p><strong>Image:</strong> ${filename}</p>`,
-                    attachments: [{
-                        filename: filename,
-                        content:  req.file.buffer.toString('base64'),
-                    }]
+                              <p><a href="https://trophyshop.jinxpwa.com/?ID=${newId}">View on TrophyShop →</a></p>`,
                 });
+                console.log(`Email sent for trophy #${newId}`);
             } catch (emailErr) {
-                console.error('Email failed:', emailErr.message);
+                console.error('Email failed:', emailErr.message, emailErr);
             }
+        } else {
+            console.warn('Email skipped — resend or notifyEmail not configured');
         }
 
         res.json({ id: newId, name, file: filename });
