@@ -19,5 +19,12 @@
     "file": "2026-Hydra-King.png",
     "price": "Priceless",
     "description": "2026 Winner: Zavie"
+  },
+  {
+    "id": 1003,
+    "name": "2026 Observer of the Year (male)",
+    "file": "trophy-1003.jpg",
+    "price": "$149",
+    "description": "Annual award given to the outstanding ultimate Observer. "
   }
 ]
