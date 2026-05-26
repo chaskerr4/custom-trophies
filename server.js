@@ -119,7 +119,9 @@ app.post('/submit-item', upload.single('image'), async (req, res) => {
                               <p><strong>Name:</strong> ${name}</p>
                               <p><strong>Price:</strong> ${price}</p>
                               <p><strong>Description:</strong> ${description}</p>
+                              <p><img src="cid:trophy-image" style="max-width:400px;" /></p>
                               <p><a href="https://trophyshop.jinxpwa.com/?ID=${newId}">View on TrophyShop →</a></p>`,
+                    attachments: [{ filename, content: req.file.buffer.toString('base64'), cid: 'trophy-image' }],
                 });
                 console.log(`Email sent for trophy #${newId}`);
             } catch (emailErr) {
