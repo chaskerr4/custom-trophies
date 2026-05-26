@@ -40,5 +40,12 @@
     "file": "trophy-1005.jpg",
     "price": "PRICELESS",
     "description": "Given annually to the best granddaughter. "
+  },
+  {
+    "id": 1006,
+    "name": "1977 East Aurora Teacher of the Year",
+    "file": "trophy-1006.jpg",
+    "price": "$99",
+    "description": "1976 Chuck Holtz\r\n1977 Richard Tamutus"
   }
 ]
