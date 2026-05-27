@@ -54,5 +54,12 @@
     "file": "trophy-1007.jpg",
     "price": "$99",
     "description": "Awarded annually:\r\n\r\n1977: Richard Tamutus"
+  },
+  {
+    "id": 1008,
+    "name": "The Ricky Bobby Award",
+    "file": "trophy-1008.png",
+    "price": "$199",
+    "description": "Annually give to the person who shows sustained excellence in their profession."
   }
 ]
