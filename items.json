@@ -61,5 +61,12 @@
     "file": "trophy-1008.png",
     "price": "$199",
     "description": "Annually give to the person who shows sustained excellence in their profession."
+  },
+  {
+    "id": 1009,
+    "name": "Everything Must Go!",
+    "file": "trophy-1009.jpg",
+    "price": "$49",
+    "description": "2026-27 framed photo. "
   }
 ]
