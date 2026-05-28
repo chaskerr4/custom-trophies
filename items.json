@@ -68,5 +68,12 @@
     "file": "trophy-1009.jpg",
     "price": "$49",
     "description": "2026-27 framed photo. "
+  },
+  {
+    "id": 1010,
+    "name": "Perpetual Traveler Award",
+    "file": "trophy-1010.jpg",
+    "price": "$149",
+    "description": "Every team has a winner. "
   }
 ]
