@@ -75,5 +75,12 @@
     "file": "trophy-1010.jpg",
     "price": "$149",
     "description": "Every team has a winner. "
+  },
+  {
+    "id": 1011,
+    "name": "Plant doctor.of the year",
+    "file": "trophy-1011.jpg",
+    "price": "Priceless",
+    "description": "Best plant pathologist"
   }
 ]
