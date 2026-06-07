@@ -82,5 +82,12 @@
     "file": "trophy-1011.jpg",
     "price": "Priceless",
     "description": "Best plant pathologist"
+  },
+  {
+    "id": 1012,
+    "name": "2026 Planter of the Year",
+    "file": "trophy-1012.jpeg",
+    "price": "Priceless",
+    "description": "Awarded each year by Peter. "
   }
 ]
