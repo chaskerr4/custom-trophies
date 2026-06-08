@@ -89,5 +89,12 @@
     "file": "trophy-1012.jpeg",
     "price": "Priceless",
     "description": "Awarded each year by Peter. "
+  },
+  {
+    "id": 1013,
+    "name": "Plant Doctor of the Year",
+    "file": "trophy-1013.jpeg",
+    "price": "Priceless",
+    "description": "2026 award as decided by Peter Balint-Kurti."
   }
 ]
