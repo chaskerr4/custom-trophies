@@ -96,5 +96,12 @@
     "file": "trophy-1013.jpeg",
     "price": "Priceless",
     "description": "2026 award as decided by Peter Balint-Kurti."
+  },
+  {
+    "id": 1014,
+    "name": "Coach of the Century",
+    "file": "trophy-1014.jpeg",
+    "price": "Priceless. Really.",
+    "description": "After just one game!"
   }
 ]
